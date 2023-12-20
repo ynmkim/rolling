@@ -31,7 +31,7 @@ function EditCard({
           </SenderProfile>
         </Profile>
         <Button
-          variant="outlined"
+          $variant="outlined"
           width="40"
           height="large"
           icon={disabled ? ICONS.deleted.white : ICONS.deleted.black}

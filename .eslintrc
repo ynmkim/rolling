@@ -24,7 +24,9 @@
     "object-curly-newline": "off",
     "max-len": "off",
     "jsx-a11y/label-has-associated-control": "off",
-    "no-console": "off"
+    "no-console": "off",
+    "no-confusing-arrow": "off",
+    "indent": "off"
   },
   "settings": {
     "import/resolver": {}

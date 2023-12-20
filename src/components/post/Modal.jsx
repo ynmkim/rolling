@@ -45,7 +45,7 @@ function Modal({ messageId, onClick }) {
           <BlankDiv />
           <ContentsMessage $fontFamily={FONT_FAMILY[modalData.font]}>{modalData.content}</ContentsMessage>
           <ButtonWrapper>
-            <Button type="button" width="120" height="large" variant="primary" onClick={onClick}>
+            <Button type="button" width="120" height="large" $variant="primary" onClick={onClick}>
               확인
             </Button>
           </ButtonWrapper>

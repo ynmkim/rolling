@@ -1,33 +1,29 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import React, { useEffect, useRef, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getRecipientMessages, getRecipient } from '../api/users';
+import styled from 'styled-components';
+import { getRecipient, getMoreRecipientMessages } from '../api/users';
+import HeaderService from '../components/HeaderService';
+import Button from '../components/elements/Button';
+import MessageCardList from '../components/post/MessageCardList';
 import useAsync from '../hooks/useAsync';
 import DESIGN_TOKEN from '../styles/tokens';
-import MessageCardList from '../components/post/MessageCardList';
-import Button from '../components/elements/Button';
-import HeaderService from '../components/HeaderService';
 
 function PostPage() {
-  const [isLoadingMessages, isErrorMessages, getRecipientMessageAsync] = useAsync(getRecipientMessages);
+  const [isLoadingMoreMessages, isErrorMoreMessages, getMoreRecipientMessageAsync] = useAsync(getMoreRecipientMessages);
   const [isLoadingRecipient, isErrorRecipient, getRecipientAsync] = useAsync(getRecipient);
   const [data, setData] = useState([]);
   const [bgData, setBgData] = useState([]);
   const [emojiUpload, setEmojiUpload] = useState(false);
-  const { id } = useParams();
-  const navigate = useNavigate();
+  const [offset, setOffset] = useState(0);
+  const [hasNext, setHasNext] = useState(true);
+
   const { name, messageCount, recentMessages, topReactions } = bgData;
 
-  useEffect(() => {
-    const handlePostInfo = async (recipientId) => {
-      const result = await getRecipientMessageAsync(recipientId);
-      if (!result) return;
-      const recipientData = result;
-      if (recipientData) {
-        setData(recipientData);
-      }
-    };
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const target = useRef(null);
 
+  useEffect(() => {
     const handlePostBackground = async (recipientId) => {
       const result = await getRecipientAsync(recipientId);
       if (!result) return;
@@ -37,13 +33,37 @@ function PostPage() {
       }
     };
 
-    handlePostInfo(id);
     handlePostBackground(id);
-  }, [id, getRecipientMessageAsync, getRecipientAsync, emojiUpload]);
-  const { results } = data;
+  }, [id, getRecipientAsync, emojiUpload]);
   const bgColor = bgData.backgroundColor;
   const bgImg = bgData.backgroundImageURL;
-  console.log(data);
+
+  useEffect(() => {
+    const callback = async (entries) => {
+      if (hasNext && !isLoadingMoreMessages && entries[0].isIntersecting) {
+        const result = await getMoreRecipientMessageAsync(id, `?offset=${offset}`);
+        if (!result) return;
+        const newMessage = result.results;
+        const prevData = data;
+        if (result) {
+          setData([...prevData, ...newMessage]);
+          setOffset((prevOffset) => prevOffset + 8);
+        }
+        if (result.next === null) setHasNext(false);
+      }
+    };
+    const options = {
+      threshold: 1.0,
+    };
+    const observer = new IntersectionObserver(callback, options);
+    observer.observe(target.current);
+
+    if (!hasNext) observer.disconnect();
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [id, offset, getMoreRecipientMessageAsync, isLoadingMoreMessages, data, hasNext]);
 
   const handleNavigate = () => {
     navigate('edit');
@@ -63,12 +83,14 @@ function PostPage() {
       <Container $bgImg={bgImg} $bgColor={bgColor}>
         <ContentWrapper>
           <ButtonWrapper>
-            <Button type="button" variant="primary" width="92" height="large" onClick={handleNavigate}>
+            <Button type="button" $variant="primary" width="92" height="large" onClick={handleNavigate}>
               편집하기
             </Button>
           </ButtonWrapper>
-          <MessageCardList results={data && results} />
+          <MessageCardList results={data} />
+          <MoreMessages ref={target} />
         </ContentWrapper>
+        <MoreMessages ref={target} />
       </Container>
     </div>
   );
@@ -130,4 +152,8 @@ const Container = styled.div`
   }};
   background-repeat: no-repeat;
   background-size: cover;
+`;
+
+const MoreMessages = styled.div`
+  height: 15rem;
 `;

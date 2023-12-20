@@ -66,7 +66,7 @@ function EditPage() {
       <Container $bgImg={bgImg} $bgColor={bgColor}>
         <ContentWrapper>
           <ButtonWrapper>
-            <Button type="button" variant="primary" width="92" height="large" onClick={handleDeleteRecipients}>
+            <Button type="button" $variant="primary" width="92" height="large" onClick={handleDeleteRecipients}>
               삭제하기
             </Button>
           </ButtonWrapper>

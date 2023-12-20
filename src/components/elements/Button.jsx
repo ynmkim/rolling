@@ -2,7 +2,7 @@ import React from 'react';
 import { css, styled } from 'styled-components';
 import DESIGN_TOKEN from '../../styles/tokens';
 
-const { color, typography } = DESIGN_TOKEN;
+const { color, typography, layout } = DESIGN_TOKEN;
 
 const HEIGHT = {
   small: '2.8rem',
@@ -53,6 +53,9 @@ const VARIANT_STYLE = {
     &:active,
     &:focus {
       background-color: ${color.purple[900]};
+    }
+    @media screen and (max-width: ${layout.breakpoint.mobile}) {
+      width: 100%;
     }
   `,
   secondary: css`
@@ -138,9 +141,9 @@ const Icon = styled.img`
   ${({ height }) => (height === 'small' ? 'height: 2rem;' : 'height: 2.4rem;')};
 `;
 
-function Button({ children, variant, width, height, disabled, icon, onClick }) {
+function Button({ children, $variant, width, height, disabled, icon, onClick }) {
   return (
-    <Container $variant={variant} width={width} height={height} icon={icon} onClick={onClick} disabled={disabled}>
+    <Container $variant={$variant} width={width} height={height} icon={icon} onClick={onClick} disabled={disabled}>
       {icon && <Icon src={icon.src} alt={icon.alt} height={height} disabled={disabled} />}
       {children}
     </Container>

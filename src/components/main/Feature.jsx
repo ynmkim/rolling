@@ -30,11 +30,13 @@ function Feature() {
     <Container>
       <PointCard content={content1} />
       <PointCard content={content2} $isReverse />
-      <Link to="/list">
-        <Button type="button" width="280" height="x-large" variant="primary">
-          구경해보기
-        </Button>
-      </Link>
+      <StyledLink>
+        <Link to="/list">
+          <Button type="button" width="280" height="x-large" $variant="primary">
+            구경해보기
+          </Button>
+        </Link>
+      </StyledLink>
     </Container>
   );
 }
@@ -42,13 +44,22 @@ function Feature() {
 export default Feature;
 
 const Container = styled.div`
-  margin-top: 6rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
+  padding: 6rem 0;
 
-  @media (max-width: ${layout.breakpoint.pc}) {
-    margin-top: 4.9rem;
+  @media (max-width: ${layout.breakpoint.mobile}) {
+    padding: 4.9rem 2.4rem 10.4rem;
+  }
+`;
+
+const StyledLink = styled.div`
+  @media (max-width: ${layout.breakpoint.mobile}) {
+    position: fixed;
+    left: 2.4rem;
+    right: 2.4rem;
+    bottom: 2.4rem;
   }
 `;

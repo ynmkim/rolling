@@ -44,7 +44,7 @@ function ListPage() {
         <PostCardList postList={latestPostList} />
       </PostContainer>
       <ButtonDiv>
-        <Button variant="primary" height="x-large" onClick={handleButtonClick}>
+        <Button $variant="primary" height="x-large" onClick={handleButtonClick}>
           나도 만들어 보기
         </Button>
       </ButtonDiv>

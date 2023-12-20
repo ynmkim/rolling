@@ -9,9 +9,8 @@ function MessageCardList({ results }) {
     <Container>
       <AddCard />
       {results?.map((item) => (
-        <div>
+        <div key={item.id}>
           <MessagesCard
-            key={item.id}
             messageId={item.id}
             sender={item.sender}
             profileImageURL={item.profileImageURL}
@@ -25,6 +24,7 @@ function MessageCardList({ results }) {
     </Container>
   );
 }
+
 export default MessageCardList;
 
 const Container = styled.div`

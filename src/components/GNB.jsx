@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import styled from 'styled-components';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
+import styled from 'styled-components';
 import logo from '../assets/images/logo.png';
-import Button from './elements/Button';
 import DESIGN_TOKEN from '../styles/tokens';
+import Button from './elements/Button';
 
 const { layout } = DESIGN_TOKEN;
 
@@ -24,7 +24,8 @@ const Container = styled.div`
   padding-top: 1.1rem;
   padding-bottom: 1.1rem;
   @media (max-width: ${layout.breakpoint.mobile}) {
-    display: ${({ $location, id }) => ($location.startsWith(`/post/${id}`) && !$location.startsWith(`/post/${id}/message`) ? 'none' : 'block')};
+    display: ${({ $location, id }) =>
+      $location.startsWith(`/post/${id}`) && !$location.startsWith(`/post/${id}/message`) ? 'none' : 'flex'};
   }
 `;
 const HorizontalDivider = styled.div`
@@ -57,7 +58,7 @@ function GNB() {
           <LogoIcon src={logo} alt="logo" />
         </Link>
         {hasButton && (
-          <Button variant="outlined" width="157" height="large" type="button" onClick={onClick}>
+          <Button $variant="outlined" width="157" height="large" type="button" onClick={onClick}>
             롤링 페이퍼 만들기
           </Button>
         )}

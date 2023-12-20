@@ -11,6 +11,9 @@ export const getRecipient = async (id) => getTeamApi(`${RECIPIENTS}${id}/`);
 /** 롤링페이퍼 대상이 받은 메세지들만 가져오기 */
 export const getRecipientMessages = async (id) => getTeamApi(`${RECIPIENTS}${id}/${MESSAGES}`);
 
+/** 롤링페이퍼 대상이 받은 메세지 추가로 가져오기 */
+export const getMoreRecipientMessages = async (id, query) => getTeamApi(`${RECIPIENTS}${id}/${MESSAGES}${query}`);
+
 /** 특정 메세지만 가져오기 */
 export const getMessage = async (messageId) => getTeamApi(`${MESSAGES}${messageId}/`);
 

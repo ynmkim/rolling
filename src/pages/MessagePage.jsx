@@ -67,56 +67,58 @@ function MessagePage() {
   }, [getProfileImageAsync, isBlank]);
 
   return (
-    <Form>
-      <Section>
-        <Title htmlFor="sender">From.</Title>
-        <InputText
-          id="sender"
-          name="sender"
-          value={values.sender}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          error={isBlank}
-        />
-      </Section>
-      <Section>
-        <Title>프로필 이미지</Title>
-        <Wrapper>
-          <Avatar size="large" profileImageURL={selectedProfile} />
-          <Section>
-            <Description>프로필 이미지를 선택해주세요!</Description>
-            <ProfileWrapper>
-              {profileData?.map((item) => (
-                <Avatar key={item} size="medium" profileImageURL={item} handleProfileClick={handleProfileClick} />
-              ))}
-            </ProfileWrapper>
-          </Section>
-        </Wrapper>
-      </Section>
-      <Section>
-        <Title>상대와의 관계</Title>
-        <Dropdown name="relationship" setValues={setValues} items={RELATIONSHIP} />
-      </Section>
-      <Section>
-        <Title htmlFor="content">내용을 입력해 주세요</Title>
-        <TextEdit id="content" name="content" value={values.content} onChange={handleChange} />
-      </Section>
-      <Section>
-        <Title>폰트 선택</Title>
-        <Dropdown name="font" setValues={setValues} items={FONT} />
-      </Section>
-      <SubmitButton>
-        <Button
-          type="submit"
-          variant="primary"
-          height="x-large"
-          disabled={!values.sender || !values.content || isPostLoading}
-          onClick={handleSubmit}
-        >
-          생성하기
-        </Button>
-      </SubmitButton>
-    </Form>
+    <Container>
+      <form>
+        <Section>
+          <Title htmlFor="sender">From.</Title>
+          <InputText
+            id="sender"
+            name="sender"
+            value={values.sender}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={isBlank}
+          />
+        </Section>
+        <Section>
+          <Title>프로필 이미지</Title>
+          <OptionProfile>
+            <Avatar size="large" profileImageURL={selectedProfile} />
+            <Section>
+              <Description>프로필 이미지를 선택해주세요!</Description>
+              <StyledAvatar>
+                {profileData?.map((item) => (
+                  <Avatar key={item} size="medium" profileImageURL={item} handleProfileClick={handleProfileClick} />
+                ))}
+              </StyledAvatar>
+            </Section>
+          </OptionProfile>
+        </Section>
+        <Section>
+          <Title>상대와의 관계</Title>
+          <Dropdown name="relationship" setValues={setValues} items={RELATIONSHIP} />
+        </Section>
+        <Section>
+          <Title htmlFor="content">내용을 입력해 주세요</Title>
+          <TextEdit id="content" name="content" value={values.content} onChange={handleChange} />
+        </Section>
+        <Section>
+          <Title>폰트 선택</Title>
+          <Dropdown name="font" setValues={setValues} items={FONT} />
+        </Section>
+        <SubmitButton>
+          <Button
+            type="submit"
+            $variant="primary"
+            height="x-large"
+            disabled={!values.sender || !values.content || isPostLoading}
+            onClick={handleSubmit}
+          >
+            생성하기
+          </Button>
+        </SubmitButton>
+      </form>
+    </Container>
   );
 }
 
@@ -124,38 +126,59 @@ export default MessagePage;
 
 const { color, typography, layout } = DESIGN_TOKEN;
 
-const Form = styled.form`
+const Container = styled.div`
+  max-width: ${layout.breakpoint.mobile};
   margin: 0 auto;
   padding: 5.7rem 2.4rem;
-  max-width: ${layout.breakpoint.mobile};
-  display: flex;
-  flex-direction: column;
-  gap: 5rem;
+  @media screen and (max-width: ${layout.breakpoint.mobile}) {
+    padding-bottom: 22.6rem;
+  }
 `;
 
 const Section = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 1.2rem;
+  margin-bottom: 5rem;
 `;
 
 const Title = styled.label`
   ${typography.font24Bold}
-  margin-bottom: 1.2rem;
 `;
+
 const Description = styled.p`
-  color: ${color.gray[500]};
+  grid-area: image;
   ${typography.font16Regular};
-  margin-bottom: 1.2rem;
+  color: ${color.gray[500]};
 `;
-const Wrapper = styled.div`
-  display: flex;
-  gap: 3.2rem;
-  align-items: center;
+
+const OptionProfile = styled.div`
+  display: grid;
+  grid-template:
+    'img text'
+    'img image' / auto 1fr;
+  column-gap: 3.2rem;
 `;
-const ProfileWrapper = styled.div`
+
+const StyledAvatar = styled.div`
+  grid-area: image;
   display: flex;
   gap: 0.4rem;
+  align-items: center;
+
+  img {
+    cursor: pointer;
+  }
+
+  @media screen and (max-width: ${layout.breakpoint.mobile}) {
+    flex-wrap: wrap;
+  }
 `;
+
 const SubmitButton = styled.div`
+  position: fixed;
+  left: 2.4rem;
+  right: 2.4rem;
+  bottom: 2.4rem;
   margin-top: 1.2rem;
 `;

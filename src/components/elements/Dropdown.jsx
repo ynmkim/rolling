@@ -4,7 +4,7 @@ import DESIGN_TOKEN from '../../styles/tokens';
 import upArrow from '../../assets/icons/arrow_up.svg';
 import downArrow from '../../assets/icons/arrow_down.svg';
 
-const { color } = DESIGN_TOKEN;
+const { color, layout } = DESIGN_TOKEN;
 
 const Container = styled.div`
   position: relative;
@@ -17,6 +17,9 @@ const Container = styled.div`
     border: 1px solid ${color.gray[300]};
     background: ${color.white};
     width: 32rem;
+    @media screen and (max-width: ${layout.breakpoint.mobile}) {
+      width: 100%;
+    }
     padding: 1.2rem 1.6rem;
 
     &:hover,
@@ -48,6 +51,9 @@ const Ul = styled.ul`
   border: 1px solid ${color.gray[300]};
   background: ${color.white};
   width: 32rem;
+  @media screen and (max-width: ${layout.breakpoint.mobile}) {
+    width: 100%;
+  }
   margin-top: 0.8rem;
   position: absolute;
 `;
@@ -55,6 +61,9 @@ const Ul = styled.ul`
 const Li = styled.li`
   display: flex;
   width: 31.8rem;
+  @media screen and (max-width: ${layout.breakpoint.mobile}) {
+    width: 100%;
+  }
   border-radius: 0.8rem;
   padding: 1.2rem 1.6rem;
   align-items: center;

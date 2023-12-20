@@ -1,5 +1,4 @@
-const url = 'https://rolling-team9.netlify.app';
-const shareKakao = (name, image) => {
+const shareKakao = (url, name, image) => {
   if (window.Kakao) {
     const kakao = window.Kakao;
     if (!kakao.isInitialized()) {

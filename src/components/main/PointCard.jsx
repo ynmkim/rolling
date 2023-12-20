@@ -46,7 +46,7 @@ const Container = styled.div`
 
   @media (max-width: ${layout.breakpoint.pc}) {
     width: calc(100vw - 4.8rem);
-    margin-bottom: ${(props) => (props.$isReverse ? '13.3rem' : '3rem')};
+    margin-bottom: ${(props) => (props.$isReverse ? '4.8rem' : '3rem')};
     padding: 4rem 0;
 
     gap: 4rem;
