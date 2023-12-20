@@ -15,6 +15,17 @@
   "ignorePatterns": ["webpack.config.js"],
   "extends": ["airbnb", "airbnb/hooks"],
   "plugins": ["prettier", "import"],
+  "rules": {
+    "react/prop-types": "off",
+    "no-unused-vars": "off",
+    "prefer-destructuring": ["error", { "object": true, "array": false }],
+    "implicit-arrow-linebreak": "off",
+    "operator-linebreak": "off",
+    "object-curly-newline": "off",
+    "max-len": "off",
+    "jsx-a11y/label-has-associated-control": "off",
+    "no-console": "off"
+  },
   "settings": {
     "import/resolver": {}
   }
