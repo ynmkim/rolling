@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import styles from '../../styles/tokens';
-import toastIconImg from '../../assets/icons/toastIcon.svg';
-import exitImg from '../../assets/icons/exit.svg';
+import toastIconImg from '../../assets/icons/check-circle.svg';
+import exitImg from '../../assets/icons/close.svg';
 
 const { color, overlayBackDropColor } = styles;
 

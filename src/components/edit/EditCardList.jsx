@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import EditCard from './EditCard';
 import { deleteMessage } from '../../api/delete';
 import DESIGN_TOKEN from '../../styles/tokens';
+import FONT_FAMILY from '../../constants/fontFamily';
 
 const { layout } = DESIGN_TOKEN;
 
@@ -28,6 +29,7 @@ function CardList({ results }) {
           relationship={item.relationship}
           content={item.content}
           createdAt={item.createdAt}
+          fontFamily={FONT_FAMILY[item.font]}
           handleDeleteMessage={() => handleDeleteMessage(item.id)}
         />
       ))}

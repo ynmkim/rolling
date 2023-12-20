@@ -39,7 +39,7 @@ function EditCard({
         />
       </Wrapper>
       <Outlined />
-      <TextFeild $fontFamily={fontFamily}>{content}</TextFeild>
+      <TextField $fontFamily={fontFamily}>{content}</TextField>
       <DateContainer>
         <Date font="font12Regular" createdAt={createdAt} />
       </DateContainer>
@@ -83,7 +83,7 @@ const Outlined = styled.div`
   margin: 0 2.4rem;
 `;
 
-const TextFeild = styled.div`
+const TextField = styled.div`
   width: 33.6rem;
   height: 10.6rem;
   margin: auto 2.4rem;

@@ -10,12 +10,14 @@ import Button from './elements/Button';
 import Icons from '../constants/Icons';
 import RecipientName from './elements/RecipientName';
 import { createReaction } from '../api/posts';
-import { getReactions } from '../api/users';
+import { getBackgroundImage, getReactions } from '../api/users';
 import useAsync from '../hooks/useAsync';
+import Toast from './elements/Toast';
+import shareKakao from '../utils/shareKakao';
 
 const { add, share, arrow } = Icons;
 
-function HeaderService({ name, messageCount, recentMessages, topReactions, id, emojiUpload, setEmojiUpload }) {
+function HeaderService({ name, messageCount, recentMessages, topReactions, id, emojiUpload, setEmojiUpload, $bgImg }) {
   const [isLoading, isError, getReactionsAsync] = useAsync(getReactions);
   const [isReactionLoading, isReactionError, createReactionAsync] = useAsync(createReaction);
   const [disabled, setDisabled] = useState(false);
@@ -23,7 +25,12 @@ function HeaderService({ name, messageCount, recentMessages, topReactions, id, e
   const [emojiOpen, setEmojiOpen] = useState(false);
   const [shareOpen, setShareOpen] = useState(false);
   const [reactions, setReactions] = useState([]);
+  const [isToastVisible, setIsToastVisible] = useState(false);
   const containerRef = useRef(null);
+
+  const host = 'https://rolling-team9.netlify.app';
+  const currentPath = `/post/${id}`;
+  console.log(host + currentPath);
 
   const handleArrowButtonClick = () => {
     if (!isOpen && reactions.length !== 0) {
@@ -78,11 +85,36 @@ function HeaderService({ name, messageCount, recentMessages, topReactions, id, e
     };
   }, [id, getReactionsAsync, emojiUpload, containerRef]);
 
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://developers.kakao.com/sdk/js/kakao.js';
+    script.async = true;
+    document.body.appendChild(script);
+    return () => document.body.removeChild(script);
+  }, []);
+
   const clickEmoji = async (emojiObject) => {
     await createReactionAsync(id, { emoji: emojiObject.emoji, type: 'increase' });
     setEmojiOpen(false);
     setEmojiUpload((prevEmojiUpload) => !prevEmojiUpload);
   };
+
+  const copyClipboard = () => {
+    navigator.clipboard
+      .writeText(host + currentPath)
+      .then(() => {
+        setIsToastVisible(true);
+        setTimeout(() => {
+          setIsToastVisible(false);
+        }, 2000);
+      })
+
+      .catch((err) => {
+        console.error('URL 복사 실패:', err);
+      });
+  };
+
+  const handleSharedKakao = () => shareKakao(host + currentPath, name, $bgImg);
 
   return (
     <>
@@ -123,12 +155,15 @@ function HeaderService({ name, messageCount, recentMessages, topReactions, id, e
             )}
           </AddButtonWrapper>
           <ColumnDivider />
+          <ToastWrapper $isVisible={isToastVisible}>
+            <Toast />
+          </ToastWrapper>
           <ShareWrapper>
             <Button variant="outlined" width="56" height="medium" icon={share} onClick={handleShareClick} />
             {shareOpen && (
               <Ul>
-                <Li>카카오톡 공유</Li>
-                <Li>URL 공유</Li>
+                <Li onClick={handleSharedKakao}>카카오톡 공유</Li>
+                <Li onClick={copyClipboard}>URL 공유</Li>
               </Ul>
             )}
           </ShareWrapper>
@@ -256,4 +291,13 @@ const Li = styled.li`
   &:hover {
     background: ${color.gray[100]};
   }
+`;
+
+const ToastWrapper = styled.div`
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%) translateY(${({ $isVisible }) => ($isVisible ? '-4rem' : '4rem')});
+  bottom: ${({ $isVisible }) => ($isVisible ? '4rem' : '-4rem')};
+  z-index: ${layout.zIndex.toast};
+  transition: 0.5s ease-out;
 `;

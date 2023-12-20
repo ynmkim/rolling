@@ -61,6 +61,7 @@ function EditPage() {
         id={id}
         setEmojiUpload={setEmojiUpload}
         emojiUpload={emojiUpload}
+        $bgImg={bgImg}
       />
       <Container $bgImg={bgImg} $bgColor={bgColor}>
         <ContentWrapper>

@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import React from 'react';
 import Layout from './components/Layout';
 import MainPage from './pages/MainPage';
@@ -25,7 +25,7 @@ function App() {
             </Route>
           </Route>
         </Route>
-        <Route path="*" element={<NotFoundPage />} />
+        <Route path="*" element={<Navigate replace to="/" />} />
       </Routes>
     </BrowserRouter>
   );

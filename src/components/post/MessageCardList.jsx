@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import MessagesCard from './MessageCard';
 import AddCard from './AddCard';
+import FONT_FAMILY from '../../constants/fontFamily';
 
 function MessageCardList({ results }) {
   return (
@@ -17,6 +18,7 @@ function MessageCardList({ results }) {
             relationship={item.relationship}
             content={item.content}
             createdAt={item.createdAt}
+            fontFamily={FONT_FAMILY[item.font]}
           />
         </div>
       ))}

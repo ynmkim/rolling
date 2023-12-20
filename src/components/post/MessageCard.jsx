@@ -9,7 +9,15 @@ import Modal from './Modal';
 
 const { color, boxShadow } = DESIGN_TOKEN;
 
-function MessagesCard({ sender, profileImageURL, relationship, content, createdAt, messageId, fontFamily = 'Noto Sans' }) {
+function MessagesCard({
+  sender,
+  profileImageURL,
+  relationship,
+  content,
+  createdAt,
+  messageId,
+  fontFamily = 'Noto Sans KR',
+}) {
   const [modal, setModal] = useState(false);
 
   const handleCardClick = () => {

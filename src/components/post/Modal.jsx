@@ -6,6 +6,7 @@ import DESIGN_TOKEN from '../../styles/tokens';
 import Button from '../elements/Button';
 import Badge from '../elements/Badge';
 import Date from '../elements/Date';
+import FONT_FAMILY from '../../constants/fontFamily';
 
 const { color, layout, boxShadow, typography } = DESIGN_TOKEN;
 
@@ -42,7 +43,7 @@ function Modal({ messageId, onClick }) {
             </DateContainer>
           </Wrapper>
           <BlankDiv />
-          <ContentsMessage>{modalData.content}</ContentsMessage>
+          <ContentsMessage $fontFamily={FONT_FAMILY[modalData.font]}>{modalData.content}</ContentsMessage>
           <ButtonWrapper>
             <Button type="button" width="120" height="large" variant="primary" onClick={onClick}>
               확인
@@ -141,6 +142,7 @@ const ContentsMessage = styled.p`
   color: #5a5a5a;
   padding-right: 1rem;
   overflow-y: auto;
+  font-family: ${({ $fontFamily }) => $fontFamily};
 
   &::-webkit-scrollbar {
     width: 0.8rem;
