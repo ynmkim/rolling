@@ -19,23 +19,22 @@ function AddCard() {
 }
 
 const Button = styled.button`
-  width: 38.4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   height: 28rem;
-  border-radius: 1.6rem;
+  padding: 2.4rem;
   box-shadow: ${boxShadow.card};
+  border-radius: 1.6rem;
   background-color: ${color.white};
-  position: relative;
 `;
 
 const PlusImg = styled.div`
-  background: url(${PlusButton});
-  background-size: cover;
   width: 5.6rem;
   height: 5.6rem;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  background: url(${PlusButton});
+  background-size: cover;
 `;
 
 export default AddCard;

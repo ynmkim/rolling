@@ -171,6 +171,12 @@ const Wrapper = styled.div`
   gap: 1.2rem;
 `;
 
+const OptionAvatar = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+`;
+
 const StyledAvatar = styled.div`
   grid-area: image;
   display: flex;
@@ -186,15 +192,11 @@ const StyledAvatar = styled.div`
 `;
 
 const SubmitButton = styled.div`
-  position: fixed;
-  left: 2.4rem;
-  right: 2.4rem;
-  bottom: 2.4rem;
-  margin-top: 1.2rem;
   @media screen and (max-width: ${layout.breakpoint.mobile}) {
     position: fixed;
-    left: 2.4rem;
-    right: 2.4rem;
+    left: 0;
+    right: 0;
     bottom: 2.4rem;
+    padding: 0 2.4rem;
   }
 `;

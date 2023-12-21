@@ -44,7 +44,6 @@ function CreatePage() {
   });
 
   const [activeTab, setActiveTab] = useState(0);
-
   const handleTabClick = (index) => {
     setActiveTab(index);
   };
@@ -255,14 +254,17 @@ const TabButton = styled.button`
 
 const TabPanel = styled.div`
   margin-bottom: 6.9rem;
-  @media screen and (max-width: ${layout.breakpoint.tablet}) {
-    overflow-y: scroll;
-  }
 `;
 
 const InputRadioGroup = styled.div`
-  display: flex;
+  display: grid;
+  width: 100%;
+  grid-template: repeat(1, 16.8rem) / repeat(4, 16.8rem);
   gap: 1.6rem;
+
+  @media screen and (max-width: ${layout.breakpoint.mobile}) {
+    grid-template: auto / repeat(2, minmax(15.4rem, 35.2rem));
+  }
 `;
 
 const InputLabel = styled.label`
@@ -270,8 +272,8 @@ const InputLabel = styled.label`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 16.8rem;
-  height: 16.8rem;
+  width: 100%;
+  aspect-ratio: 1;
   border-radius: 1.2rem;
   border: 1px solid rgba(0, 0, 0, 0.08);
   cursor: pointer;
@@ -312,9 +314,10 @@ const InputRadio = styled.input`
 const StyledButton = styled.div`
   @media screen and (max-width: ${layout.breakpoint.mobile}) {
     position: fixed;
-    left: 2.4rem;
-    right: 2.4rem;
+    left: 0;
+    right: 0;
     bottom: 2.4rem;
+    padding: 0 2.4rem;
   }
 `;
 

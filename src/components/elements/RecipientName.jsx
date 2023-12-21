@@ -2,12 +2,20 @@ import React from 'react';
 import styled from 'styled-components';
 import DESIGN_TOKEN from '../../styles/tokens';
 
-const { color, typography } = DESIGN_TOKEN;
+const { color, typography, layout } = DESIGN_TOKEN;
 
 const Wrapper = styled.div`
   color: inherit;
   color: ${({ $colorNum }) => $colorNum && color.gray[$colorNum]};
   ${({ $font }) => $font && typography[$font]}
+  max-width: 30rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  @media (max-width: ${layout.breakpoint.mobile}) {
+    ${typography.font18Bold}
+  }
 `;
 
 function RecipientName({ colorNum, font, name }) {

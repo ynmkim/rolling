@@ -54,21 +54,19 @@ function MessagesCard({
 export default MessagesCard;
 
 const Container = styled.div`
-  width: 38.4rem;
-  height: 28rem;
-  border-radius: 1.6rem;
-  box-shadow: ${boxShadow.card};
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  height: 28rem;
+  padding: 2.4rem;
+  box-shadow: ${boxShadow.card};
+  border-radius: 1.6rem;
   background-color: ${color.white};
-  cursor: pointer;
 `;
 
 const Wrapper = styled.div`
-  margin: 2.8rem 2.4rem 0;
   padding-bottom: 1.5rem;
   display: flex;
-  align-items: center;
   justify-content: space-between;
 `;
 
@@ -84,23 +82,17 @@ const SenderProfile = styled.div`
 `;
 
 const Outlined = styled.div`
-  width: 33.6rem;
   height: 0.1rem;
   background: ${color.gray[200]};
-  margin: 0 2.4rem;
 `;
 
 const TextField = styled.div`
-  width: 33.6rem;
-  height: 10rem;
-  margin: auto 2.4rem;
+  min-height: 10.6rem;
   overflow: hidden;
   display: -webkit-box;
-  -webkit-line-clamp: 4;
+  -webkit-line-clamp: 5;
   -webkit-box-orient: vertical;
   font-family: ${({ $fontFamily }) => $fontFamily};
 `;
 
-const DateContainer = styled.div`
-  margin: 1.6rem 27.6rem 2.4rem 2.4rem;
-`;
+const DateContainer = styled.div``;

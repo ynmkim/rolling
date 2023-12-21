@@ -17,6 +17,7 @@ const shareKakao = (url, name, backgroundImageURL) => {
         imageUrl: image,
         link: {
           mobileWebUrl: url,
+          webUrl: url,
         },
       },
       buttons: [
@@ -24,6 +25,7 @@ const shareKakao = (url, name, backgroundImageURL) => {
           title: name,
           link: {
             mobileWebUrl: url,
+            webUrl: url,
           },
         },
       ],

@@ -129,7 +129,9 @@ function HeaderService({ name, messageCount, recentMessages, topReactions, id, e
             <Emojis>
               <Emoji reactions={topReactions} />
             </Emojis>
-            <Button width="36" height="medium" icon={arrow.down} onClick={handleArrowButtonClick} />
+            <StyledButton>
+              <Button width="36" height="medium" icon={arrow.down} onClick={handleArrowButtonClick} />
+            </StyledButton>
             {isOpen && (
               <EmojiExpanded>
                 <Emoji reactions={reactions} />
@@ -145,7 +147,7 @@ function HeaderService({ name, messageCount, recentMessages, topReactions, id, e
               disabled={disabled}
               onClick={handleAddReactionClick}
             >
-              추가
+              <ButtonText>추가</ButtonText>
             </Button>
             {emojiOpen && (
               <EmojiPickerWrapper>
@@ -158,7 +160,9 @@ function HeaderService({ name, messageCount, recentMessages, topReactions, id, e
             <Toast />
           </ToastWrapper>
           <ShareWrapper>
-            <Button $variant="outlined" width="56" height="medium" icon={share} onClick={handleShareClick} />
+            <StyledButton>
+              <Button $variant="outlined" width="56" height="medium" icon={share} onClick={handleShareClick} />
+            </StyledButton>
             {shareOpen && (
               <Ul>
                 <Li onClick={handleSharedKakao}>카카오톡 공유</Li>
@@ -183,21 +187,23 @@ const Container = styled.div`
   align-items: center;
   max-width: 124.8rem;
   width: 100%;
-  padding: 0 2.4rem;
+  padding: 1.3rem 2.4rem;
   height: 6.4rem;
   margin: 0 auto;
-  padding-top: 1.3rem;
-  padding-bottom: 1.3rem;
 
   @media (max-width: ${layout.breakpoint.mobile}) {
     flex-direction: column;
     align-items: flex-start;
-    height: 12.8rem;
+    height: 10.4rem;
+    padding: 1.3rem 2rem;
   }
 `;
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
+  @media (max-width: ${layout.breakpoint.mobile}) {
+    align-self: end;
+  }
 `;
 
 const HorizontalDivider = styled.div`
@@ -211,6 +217,7 @@ const ColumnDivider = styled.div`
   background-color: ${color.gray[200]};
   margin: 0 1.3rem;
 `;
+
 const Senders = styled.div`
   display: flex;
   align-items: center;
@@ -229,34 +236,43 @@ const Emojis = styled.div`
 const Reactions = styled.div`
   display: flex;
   align-items: center;
-  margin-right: 0.8rem;
   position: relative;
 `;
-const EmojiExpanded = styled.span`
+const EmojiExpanded = styled.div`
   background: ${color.white};
   padding: 2.4rem;
   position: absolute;
   right: 0;
   top: 4.3rem;
   display: grid;
-  grid-template-columns: repeat(4, 5.6rem);
-  grid-template-rows: repeat(auto-fit, 3.8rem);
+  grid-template-columns: repeat(3, 1fr);
   gap: 1rem 0.8rem;
   border-radius: 0.8rem;
   border: 1px solid #b6b6b6;
   box-shadow: ${boxShadow.card};
+  @media (max-width: ${layout.breakpoint.mobile}) {
+    left: 0;
+    right: auto;
+    padding: 1.6rem;
+  }
 `;
 
 const AddButtonWrapper = styled.div`
   position: relative;
   @media (max-width: ${layout.breakpoint.mobile}) {
-    display: none;
+    button {
+      width: 3.6rem;
+    }
   }
 `;
 const EmojiPickerWrapper = styled.div`
   position: absolute;
   right: 0;
   top: 4.3rem;
+  @media (max-width: ${layout.breakpoint.mobile}) {
+    right: 100%;
+    transform: translateX(3.6rem);
+  }
 `;
 
 const ShareWrapper = styled.div`
@@ -299,4 +315,20 @@ const ToastWrapper = styled.div`
   bottom: ${({ $isVisible }) => ($isVisible ? '4rem' : '-4rem')};
   z-index: ${layout.zIndex.toast};
   transition: 0.5s ease-out;
+`;
+
+const StyledButton = styled.div`
+  margin: 0 0.8rem;
+  @media (max-width: ${layout.breakpoint.mobile}) {
+    margin: 0 0.2rem;
+    button {
+      width: 3.6rem;
+    }
+  }
+`;
+
+const ButtonText = styled.div`
+  @media (max-width: ${layout.breakpoint.mobile}) {
+    display: none;
+  }
 `;

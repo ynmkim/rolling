@@ -137,14 +137,14 @@ const Container = styled.button`
     `};
 `;
 
-const Icon = styled.img`
+const ButtonIcon = styled.img`
   ${({ height }) => (height === 'small' ? 'height: 2rem;' : 'height: 2.4rem;')};
 `;
 
 function Button({ children, $variant, width, height, disabled, icon, onClick }) {
   return (
     <Container $variant={$variant} width={width} height={height} icon={icon} onClick={onClick} disabled={disabled}>
-      {icon && <Icon src={icon.src} alt={icon.alt} height={height} disabled={disabled} />}
+      {icon && <ButtonIcon src={icon.src} alt={icon.alt} height={height} disabled={disabled} />}
       {children}
     </Container>
   );

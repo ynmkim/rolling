@@ -87,11 +87,11 @@ function PostPage() {
       />
       <Container $bgImg={bgImg} $bgColor={bgColor}>
         <ContentWrapper>
-          <ButtonWrapper>
+          <StyledButton>
             <Button type="button" $variant="primary" width="92" height="large" onClick={handleNavigate}>
               편집하기
             </Button>
-          </ButtonWrapper>
+          </StyledButton>
           <MessageCardList results={data} />
           <MoreMessages ref={target} />
         </ContentWrapper>
@@ -106,40 +106,34 @@ export default PostPage;
 const { typography, layout, color } = DESIGN_TOKEN;
 
 const ContentWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 120rem;
+  max-width: 124.8rem;
+  width: 100%;
   margin: 0 auto;
-  padding-top: 6.3rem;
-
-  @media (max-width: ${layout.breakpoint.tablet}) {
-    width: 80rem;
-  }
+  padding: 6.3rem 2.4rem;
 
   @media (max-width: ${layout.breakpoint.mobile}) {
-    width: 40rem;
+    padding: 2.4rem 2.4rem 10.4rem;
   }
 `;
 
-const ButtonWrapper = styled.div`
+const StyledButton = styled.div`
   display: flex;
   justify-content: flex-end;
   width: 100%;
   margin-bottom: 1.1rem;
-  ${typography.font16Regular};
-
-  @media (max-width: ${layout.breakpoint.tablet}) {
-    position: fixed;
-    justify-content: center;
-    bottom: 1rem;
-    left: 0.8rem;
-  }
 
   @media (max-width: ${layout.breakpoint.mobile}) {
     position: fixed;
-    justify-content: center;
-    bottom: 11px;
+    left: 0;
+    right: 0;
+    bottom: 2.4rem;
+    padding: 0 2.4rem;
+    margin-bottom: 0;
+    button {
+      width: 100%;
+      height: 5.6rem;
+      ${typography.font18Regular};
+    }
   }
 `;
 

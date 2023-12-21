@@ -48,7 +48,7 @@ function Modal({ messageId, onClick }) {
             {modalData.content && parse(modalData.content)}
           </ContentsMessage>
           <ButtonWrapper>
-            <Button type="button" width="120" height="large" $variant="primary" onClick={onClick}>
+            <Button type="button" height="x-large" $variant="primary" onClick={onClick}>
               확인
             </Button>
           </ButtonWrapper>

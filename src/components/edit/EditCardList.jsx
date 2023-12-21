@@ -38,25 +38,20 @@ function CardList({ results }) {
 }
 
 const Container = styled.div`
+  width: 100%;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  row-gap: 2rem;
-  column-gap: 2.4rem;
-  width: 120rem;
-  margin: 0 auto;
-  padding-bottom: 11.3rem;
+  grid-template-columns: repeat(3, minmax(30rem, 38.4rem));
+  justify-content: space-between;
+@media (max-width: ${layout.breakpoint.mobile}) {
+    display: flex;
+    flex-direction: column;
+  }  gap: 2.8rem calc(1.6rem);
 
   @media (max-width: ${layout.breakpoint.tablet}) {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(30rem, 50rem));
     gap: 1.6rem;
-    width: 76.8rem;
   }
-
-  @media (max-width: ${layout.breakpoint.mobile}) {
-    grid-template-columns: repeat(1, 1fr);
-    gap: 1.6rem;
-    width: 36rem;
-  }
+  
 `;
 
 export default CardList;

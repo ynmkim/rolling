@@ -25,6 +25,11 @@ const Wrapper = styled.div`
   h1 {
     margin-left: 0.6rem;
     ${typography.font18Bold};
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
   }
 `;
 

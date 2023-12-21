@@ -56,10 +56,12 @@ const Container = styled.div`
 `;
 
 const StyledLink = styled.div`
+  position: fixed;
+  bottom: 3.8rem;
+
   @media (max-width: ${layout.breakpoint.mobile}) {
-    position: fixed;
-    left: 2.4rem;
-    right: 2.4rem;
-    bottom: 2.4rem;
+    left: 0;
+    right: 0;
+    padding: 0 2.4rem;
   }
 `;

@@ -50,6 +50,7 @@ const CardContainer = styled.div`
   position: relative;
   width: 27.5rem;
   height: 26rem;
+  padding: 0 24px;
   flex-shrink: 0;
   padding: 3rem 2.4rem 2rem;
   border-radius: 1.6rem;
