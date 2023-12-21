@@ -87,17 +87,17 @@ function MessagePage() {
           </Section>
           <Section>
             <Title>프로필 이미지</Title>
-            <OptionProfile>
+            <SelectAvatar>
               <Avatar size="large" profileImageURL={selectedProfile} />
-              <Wrapper>
+              <OptionAvatar>
                 <Description>프로필 이미지를 선택해주세요!</Description>
                 <StyledAvatar>
                   {profileData?.map((item) => (
                     <Avatar key={item} size="medium" profileImageURL={item} handleProfileClick={handleProfileClick} />
                   ))}
                 </StyledAvatar>
-              </Wrapper>
-            </OptionProfile>
+              </OptionAvatar>
+            </SelectAvatar>
           </Section>
           <Section>
             <Title>상대와의 관계</Title>
@@ -145,11 +145,12 @@ const Container = styled.div`
 const Section = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
   margin-bottom: 5rem;
 `;
 
 const Title = styled.label`
+  display: block;
+  margin-bottom: 1.2rem;
   ${typography.font24Bold}
 `;
 
@@ -158,17 +159,12 @@ const Description = styled.p`
   color: ${color.gray[500]};
   ${typography.font16Regular};
 `;
-const OptionProfile = styled.div`
+const SelectAvatar = styled.div`
   display: grid;
   grid-template:
     'img text'
     'img image' / auto 1fr;
   column-gap: 3.2rem;
-`;
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
 `;
 
 const OptionAvatar = styled.div`
@@ -192,11 +188,12 @@ const StyledAvatar = styled.div`
 `;
 
 const SubmitButton = styled.div`
-  @media screen and (max-width: ${layout.breakpoint.mobile}) {
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 2.4rem;
-    padding: 0 2.4rem;
-  }
+  position: fixed;
+  bottom: 2.4rem;
+  left: 0;
+  right: 0;
+  max-width: 768px;
+  margin: 0 auto;
+  padding: 0 2.4rem;
+  ${layout.zIndex.sticky};
 `;

@@ -48,8 +48,13 @@ function EditPage() {
   const bgImg = bgData.backgroundImageURL;
 
   const handleDeleteRecipients = async () => {
-    await deleteRecipientDAsync(id);
-    navigate('/list');
+    // eslint-disable-next-line no-alert
+    const userConfirmed = window.confirm('정말로 삭제하시겠습니까?');
+
+    if (userConfirmed) {
+      await deleteRecipientDAsync(id);
+      navigate('/list');
+    }
   };
 
   return (
@@ -91,7 +96,7 @@ const ContentWrapper = styled.div`
   margin: 0 auto;
   padding: 6.3rem 2.4rem;
 
-  @media (max-width: ${layout.breakpoint.mobile}) {
+  @media (max-width: ${layout.breakpoint.tablet}) {
     padding: 2.4rem 2.4rem 10.4rem;
   }
 `;
@@ -102,14 +107,14 @@ const StyledButton = styled.div`
   width: 100%;
   margin-bottom: 1.1rem;
 
-  @media (max-width: ${layout.breakpoint.mobile}) {
+  @media (max-width: ${layout.breakpoint.tablet}) {
     position: fixed;
     left: 0;
     right: 0;
     bottom: 2.4rem;
     padding: 0 2.4rem;
     margin-bottom: 0;
-
+  
     button {
       width: 100%;
       height: 5.6rem;
@@ -126,7 +131,7 @@ const Container = styled.div`
       return `url(${props.$bgImg})`;
     }
     if (props.$bgColor) {
-      return color[props.$bgColor][200];
+      return color.xMas[props.$bgColor][200];
     }
     return color.white;
   }};

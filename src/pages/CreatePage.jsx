@@ -1,11 +1,13 @@
 import React, { styled, css } from 'styled-components';
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import Button from '../components/elements/Button';
+import InputText from '../components/elements/InputText';
 import checkIcon from '../assets/icons/check.svg';
 import DESIGN_TOKEN from '../styles/tokens';
 import { createRecipient } from '../api/posts';
+
 import useAsync from '../hooks/useAsync';
 
 const { color, typography, layout } = DESIGN_TOKEN;
@@ -16,26 +18,13 @@ const IMAGE_VALUES = [
   'https://ymkimstorage.s3.ap-northeast-2.amazonaws.com/optionImage3.png',
   'https://ymkimstorage.s3.ap-northeast-2.amazonaws.com/optionImage4.png',
 ];
-const VARIANT_STYLE = {
-  color: css`
-    background: ${({ value }) => value && color[value][200]};
-    &:hover {
-      border: 3px solid ${({ value }) => color[value][300]};
-    }
-  `,
-  image: css`
-    background-image: ${({ value }) => `url('${value}')`};
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-  `,
-};
 
 function CreatePage() {
   const [isLoading, isError, createRecipientAsync] = useAsync(createRecipient);
   const [disabled, setDisabled] = useState(false);
   const navigate = useNavigate();
-  const nameInput = useRef();
+  const [emptyInputError, setEmptyInputError] = useState(false);
+
   const [errorMessage, setErrorMessage] = useState(false);
   const [values, setValues] = useState({
     name: '',
@@ -63,11 +52,14 @@ function CreatePage() {
     setDisabled(false);
   };
 
+  const onBlurHandler = (e) => {
+    setEmptyInputError(!e.target.value);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (values.name.length < 1) {
-      nameInput.current.focus();
       setErrorMessage(true);
       setDisabled(true);
       return;
@@ -134,11 +126,10 @@ function CreatePage() {
               name="name"
               value={values.name}
               onChange={handleChangeValues}
-              ref={nameInput}
+              onBlur={onBlurHandler}
+              error={emptyInputError}
               placeholder="받는 사람 이름을 입력해주세요."
-              autoComplete="name"
             />
-            <ErrorMessage style={{ display: errorMessage ? 'block' : 'none' }}>값을 입력해주세요.</ErrorMessage>
           </Recipient>
           <Title>배경화면을 선택해주세요.</Title>
           <Description>컬러를 선택하거나, 이미지를 선택할 수 있습니다.</Description>
@@ -168,6 +159,24 @@ function CreatePage() {
     </>
   );
 }
+const VARIANT_STYLE = {
+  color: css`
+    /* background: ${({ value }) => value && color[value][200]}; */
+    background: ${({ value }) => value && color.xMas[value][200]};
+    &:hover {
+      border: 3px solid ${({ value }) => color.xMas[value][300]};
+    }
+  `,
+  image: css`
+    background-image: ${({ value }) => `url('${value}')`};
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    &:hover {
+      border: 3px solid ${color.green[550]};
+    }
+  `,
+};
 
 const Container = styled.div`
   margin: 0 auto;
@@ -197,31 +206,6 @@ const Description = styled.p`
   ${typography.font16Regular};
 `;
 
-const InputText = styled.input`
-  width: 100%;
-  height: 5rem;
-  padding: 1.2rem 1.6rem;
-  border-radius: 0.8rem;
-  border: 1px solid ${color.gray[300]};
-  background: ${color.white};
-  transition: background-color 0.2s ease;
-
-  &:hover,
-  &:focus {
-    border: 1px solid ${color.gray[500]};
-    outline: none;
-  }
-  &:active {
-    border: 1px solid ${color.gray[700]};
-  }
-`;
-
-const ErrorMessage = styled.span`
-  margin-top: 0.8rem;
-  color: ${color.error};
-  ${typography.font15Regular};
-`;
-
 const TabList = styled.ul`
   display: flex;
   justify-content: space-between;
@@ -235,10 +219,10 @@ const Tab = styled.li`
   flex: 1 1 0;
   button {
     &.active {
-      border: 2px solid ${color.purple[600]};
+      border: 2px solid ${color.red[900]};
       background-color: ${color.white};
       font-weight: 700;
-      color: ${color.purple[600]};
+      color: ${color.red[900]};
     }
   }
 `;

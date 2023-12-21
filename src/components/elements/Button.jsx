@@ -43,16 +43,16 @@ const HEIGHT_STYLE = {
 
 const VARIANT_STYLE = {
   primary: css`
-    background-color: ${color.purple[600]};
+    background-color: ${color.green[600]};
     color: ${color.white};
     &:hover {
       &:enabled {
-        background-color: ${color.purple[900]};
+        background-color: ${color.red[900]};
       }
     }
     &:active,
     &:focus {
-      background-color: ${color.purple[900]};
+      background-color: ${color.red[900]};
     }
     @media screen and (max-width: ${layout.breakpoint.mobile}) {
       width: 100%;

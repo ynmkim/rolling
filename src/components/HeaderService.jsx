@@ -119,6 +119,7 @@ function HeaderService({ name, messageCount, recentMessages, topReactions, id, e
     <>
       <Container ref={containerRef}>
         <RecipientName font="font28Bold" name={name} />
+        <HorizontalDivider />
         <Wrapper>
           <Senders>
             <Avatars left="28" recentMessages={recentMessages} messageCount={messageCount} />
@@ -195,7 +196,9 @@ const Container = styled.div`
     flex-direction: column;
     align-items: flex-start;
     height: 10.4rem;
-    padding: 1.3rem 2rem;
+    padding: 0.8rem 2rem;
+    gap: 0.8rem;
+
   }
 `;
 const Wrapper = styled.div`
@@ -208,7 +211,12 @@ const Wrapper = styled.div`
 
 const HorizontalDivider = styled.div`
   height: 0.1rem;
+  width: 100%;
   background-color: #ededed;
+
+  @media (min-width: ${layout.breakpoint.mobile}) {
+    display: none;
+  }
 `;
 
 const ColumnDivider = styled.div`
@@ -273,6 +281,12 @@ const EmojiPickerWrapper = styled.div`
     right: 100%;
     transform: translateX(3.6rem);
   }
+
+  @media (max-width: 402px) {
+    right: -100%;
+    transform: translateX(3.6rem);
+  }
+
 `;
 
 const ShareWrapper = styled.div`

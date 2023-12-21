@@ -25,7 +25,7 @@ function PostCard({ name, backgroundColor, backgroundImgUrl, messageCount, recen
           </SenderContainer>
         ) : (
           <SenderContainer>
-            <RecipientName colorNum="900" font="font24Bold" name={name} />
+            <RecipientName colorNum="800" font="font24Bold" name={name} />
             <Avatars recentMessages={recentMessages} messageCount={messageCount} />
             <StyledMessageCounter font="font16Regular" colorNum="700" messageCount={messageCount} />
           </SenderContainer>
@@ -66,31 +66,35 @@ const CardContainer = styled.div`
     }
     if ($backgroundColor === 'purple') {
       return `
-        background: ${color.purple[200]};
-        background-image: url(${pattern1});
+        // background: ${color.purple[200]};
+        background: ${color.xMas.purple[200]};
+        //background-image: url(${pattern1});
         background-position: right bottom;
         background-repeat: no-repeat
       `;
     }
     if ($backgroundColor === 'beige') {
       return `
-        background: ${color.beige[200]};
-        background-image: url(${pattern2});
+        // background: ${color.beige[200]};
+        background: ${color.xMas.beige[200]};
+        //background-image: url(${pattern2});
         background-position: right bottom;
         background-repeat: no-repeat
       `;
     }
     if ($backgroundColor === 'blue') {
       return `
-        background: ${color.blue[200]};
-        background-image: url(${pattern3});
+        // background: ${color.blue[100]};
+        background: ${color.xMas.blue[200]};
+        // background-image: url(${pattern3});
         background-position: right bottom;
         background-repeat: no-repeat
       `;
     }
     return `
-      background: ${color.green[200]};
-      background-image: url(${pattern4});
+      // background: ${color.green[200]};
+      background: ${color.xMas.green[200]};
+      //background-image: url(${pattern4});
       background-position: right bottom;
       background-repeat: no-repeat
     `;

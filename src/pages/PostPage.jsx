@@ -8,6 +8,8 @@ import Button from '../components/elements/Button';
 import MessageCardList from '../components/post/MessageCardList';
 import useAsync from '../hooks/useAsync';
 import DESIGN_TOKEN from '../styles/tokens';
+import Skeleton from '../components/elements/Skeleton';
+import MessageCardSkeleton from '../components/post/MessageCardSkeleton';
 
 function PostPage() {
   const [isLoadingMoreMessages, isErrorMoreMessages, getMoreRecipientMessageAsync] = useAsync(getMoreRecipientMessages);
@@ -75,27 +77,34 @@ function PostPage() {
       <Helmet>
         <title>{name && `${name.slice(0, 13)} | Rolling`}</title>
       </Helmet>
-      <HeaderService
-        name={name}
-        messageCount={messageCount}
-        recentMessages={recentMessages}
-        topReactions={topReactions}
-        id={id}
-        setEmojiUpload={setEmojiUpload}
-        emojiUpload={emojiUpload}
-        bgImg={bgImg}
-      />
+      {isLoadingRecipient ? (
+        <Skeleton type="header" />
+      ) : (
+        <HeaderService
+          name={name}
+          messageCount={messageCount}
+          recentMessages={recentMessages}
+          topReactions={topReactions}
+          id={id}
+          setEmojiUpload={setEmojiUpload}
+          emojiUpload={emojiUpload}
+          bgImg={bgImg}
+        />
+      )}
       <Container $bgImg={bgImg} $bgColor={bgColor}>
         <ContentWrapper>
           <StyledButton>
-            <Button type="button" $variant="primary" width="92" height="large" onClick={handleNavigate}>
-              편집하기
-            </Button>
+            {isLoadingRecipient ? (
+              <Skeleton type="editButton" />
+            ) : (
+              <Button type="button" $variant="primary" width="92" height="large" onClick={handleNavigate}>
+                편집하기
+              </Button>
+            )}
           </StyledButton>
-          <MessageCardList results={data} />
+          {isLoadingRecipient ? <MessageCardSkeleton /> : <MessageCardList results={data} />}
           <MoreMessages ref={target} />
         </ContentWrapper>
-        <MoreMessages ref={target} />
       </Container>
     </div>
   );
@@ -111,7 +120,7 @@ const ContentWrapper = styled.div`
   margin: 0 auto;
   padding: 6.3rem 2.4rem;
 
-  @media (max-width: ${layout.breakpoint.mobile}) {
+  @media (max-width: ${layout.breakpoint.tablet}) {
     padding: 2.4rem 2.4rem 10.4rem;
   }
 `;
@@ -122,7 +131,7 @@ const StyledButton = styled.div`
   width: 100%;
   margin-bottom: 1.1rem;
 
-  @media (max-width: ${layout.breakpoint.mobile}) {
+  @media (max-width: ${layout.breakpoint.tablet}) {
     position: fixed;
     left: 0;
     right: 0;
@@ -145,7 +154,7 @@ const Container = styled.div`
       return `url(${props.$bgImg})`;
     }
     if (props.$bgColor) {
-      return color[props.$bgColor][200];
+      return color.xMas[props.$bgColor][200];
     }
     return color.white;
   }};

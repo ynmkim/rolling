@@ -3,7 +3,7 @@ const DESIGN_TOKEN = {
     white: '#FFFFFF',
     black: '#000000',
     error: '#DC3A3A',
-    surface: '#F6F8FF',
+    surface: '#f8f9fa',
     purple: {
       100: '#F8F0FF',
       200: '#ECD9FF',
@@ -35,6 +35,12 @@ const DESIGN_TOKEN = {
       300: '#9BE282',
       400: '#60CF37',
       500: '#2BA600',
+      550: '#4b7a47',
+      600: '#30523a',
+      700: '#2b5116',
+    },
+    red: {
+      900: '#bf1832',
     },
     gray: {
       100: '#F6F6F6',
@@ -46,6 +52,12 @@ const DESIGN_TOKEN = {
       700: '#3A3A3A',
       800: '#2B2B2B',
       900: '#181818',
+    },
+    xMas: {
+      green: { 200: '#b8cab2', 300: '#96b8a5' },
+      beige: { 200: '#f1eedb', 300: '#eae3c6' },
+      blue: { 200: '#d9e5db', 300: '#b8cab2' },
+      purple: { 200: '#f1cdc7', 300: '#e59b90' },
     },
   },
   typography: {

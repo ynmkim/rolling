@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { Link } from 'react-router-dom';
 import introducePoint1 from '../../assets/images/cardBundle.png';
 import introducePoint2 from '../../assets/images/emojiBundle.png';
@@ -50,18 +50,29 @@ const Container = styled.div`
   align-items: center;
   padding: 6rem 0;
 
-  @media (max-width: ${layout.breakpoint.mobile}) {
+  @media (max-width: ${layout.breakpoint.tablet}) {
     padding: 4.9rem 2.4rem 10.4rem;
   }
+`;
+
+const ButtonGlow = keyframes`
+50%{
+  opacity: 0.6;
+}
 `;
 
 const StyledLink = styled.div`
   position: fixed;
   bottom: 3.8rem;
+  animation: ${ButtonGlow} 2s ease-in-out infinite;
 
-  @media (max-width: ${layout.breakpoint.mobile}) {
+  @media (max-width: ${layout.breakpoint.tablet}) {
     left: 0;
     right: 0;
     padding: 0 2.4rem;
+    button {
+      width: 100%;
+    }
+
   }
 `;

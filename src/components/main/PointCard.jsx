@@ -86,7 +86,7 @@ const PointContainer = styled.div`
   padding: 0.6rem 1.2rem;
   display: inline-block;
   border-radius: 5rem;
-  background: ${color.purple[600]};
+  background: ${color.green[550]};
 
   p {
     ${typography.font14Bold};

@@ -84,6 +84,10 @@ const Container = styled.div`
   position: relative;
   padding: 0 4rem;
   gap: 2rem;
+
+  @media (max-width: ${layout.breakpoint.tablet}) {
+    padding: 0;
+  }
 `;
 
 const Wrapper = styled.div`
@@ -94,6 +98,11 @@ const Wrapper = styled.div`
   padding: 2rem;
   gap: 2rem;
   overflow: hidden;
+
+  @media (max-width: ${layout.breakpoint.tablet}) {
+    width: 100%;
+    right: 0;
+  }
 `;
 
 const CardContainer = styled.div`
@@ -102,7 +111,7 @@ const CardContainer = styled.div`
   display: flex;
   gap: 2rem;
 
-  @media (max-width: ${layout.breakpoint.tablet}) {
+  @media (max-width: ${layout.breakpoint.pc}) {
     overflow: scroll;
     -webkit-overflow-scrolling: touch;
 
@@ -127,7 +136,7 @@ const Button = styled.button`
   height: 4rem;
   flex-shrink: 0;
   backdrop-filter: blur(2px);
-  @media (max-width: ${layout.breakpoint.tablet}) {
+  @media (max-width: ${layout.breakpoint.pc}) {
     display: none;
   }
 `;

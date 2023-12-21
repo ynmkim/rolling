@@ -13,8 +13,11 @@ const Wrapper = styled.div`
   white-space: nowrap;
   text-overflow: ellipsis;
   word-break: break-all;
+  
   @media (max-width: ${layout.breakpoint.mobile}) {
     ${typography.font18Bold}
+    padding: 0.4rem 0;
+
   }
 `;
 

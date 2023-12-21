@@ -71,7 +71,7 @@ const Input = styled.input`
 `;
 
 const ErrorMessage = styled.div`
-  margin-top: 0.8rem;
+  margin-top: 0.4rem;
   color: ${color.error};
   ${typography.font15Regular};
 `;
