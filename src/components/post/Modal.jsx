@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import parse from 'html-react-parser';
 import { getMessage } from '../../api/users';
 import useAsync from '../../hooks/useAsync';
 import DESIGN_TOKEN from '../../styles/tokens';
@@ -43,7 +44,9 @@ function Modal({ messageId, onClick }) {
             </DateContainer>
           </Wrapper>
           <BlankDiv />
-          <ContentsMessage $fontFamily={FONT_FAMILY[modalData.font]}>{modalData.content}</ContentsMessage>
+          <ContentsMessage $fontFamily={FONT_FAMILY[modalData.font]}>
+            {modalData.content && parse(modalData.content)}
+          </ContentsMessage>
           <ButtonWrapper>
             <Button type="button" width="120" height="large" $variant="primary" onClick={onClick}>
               확인

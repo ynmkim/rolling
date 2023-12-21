@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { Helmet } from 'react-helmet';
 import { getRecipient, getMoreRecipientMessages } from '../api/users';
 import HeaderService from '../components/HeaderService';
 import Button from '../components/elements/Button';
@@ -71,6 +72,9 @@ function PostPage() {
 
   return (
     <div>
+      <Helmet>
+        <title>{name && `${name.slice(0, 13)} | Rolling`}</title>
+      </Helmet>
       <HeaderService
         name={name}
         messageCount={messageCount}
@@ -79,6 +83,7 @@ function PostPage() {
         id={id}
         setEmojiUpload={setEmojiUpload}
         emojiUpload={emojiUpload}
+        bgImg={bgImg}
       />
       <Container $bgImg={bgImg} $bgColor={bgColor}>
         <ContentWrapper>

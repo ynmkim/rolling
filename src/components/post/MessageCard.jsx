@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import parse from 'html-react-parser';
 import DESIGN_TOKEN from '../../styles/tokens';
 import Avatar from '../elements/Avatar';
 import SenderName from '../elements/SenderName';
@@ -40,7 +41,7 @@ function MessagesCard({
           </Profile>
         </Wrapper>
         <Outlined />
-        <TextField $fontFamily={fontFamily}>{content}</TextField>
+        <TextField $fontFamily={fontFamily}>{parse(content)}</TextField>
         <DateContainer>
           <Date font="font12Regular" createdAt={createdAt} />
         </DateContainer>

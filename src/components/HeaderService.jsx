@@ -17,7 +17,7 @@ import shareKakao from '../utils/shareKakao';
 
 const { add, share, arrow } = Icons;
 
-function HeaderService({ name, messageCount, recentMessages, topReactions, id, emojiUpload, setEmojiUpload, $bgImg }) {
+function HeaderService({ name, messageCount, recentMessages, topReactions, id, emojiUpload, setEmojiUpload, bgImg }) {
   const [isLoading, isError, getReactionsAsync] = useAsync(getReactions);
   const [isReactionLoading, isReactionError, createReactionAsync] = useAsync(createReaction);
   const [disabled, setDisabled] = useState(false);
@@ -113,7 +113,7 @@ function HeaderService({ name, messageCount, recentMessages, topReactions, id, e
       });
   };
 
-  const handleSharedKakao = () => shareKakao(host + currentPath, name, $bgImg);
+  const handleSharedKakao = () => shareKakao(host + currentPath, name, bgImg);
 
   return (
     <>

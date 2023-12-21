@@ -7,7 +7,6 @@ import CreatePage from './pages/CreatePage';
 import PostPage from './pages/PostPage';
 import MessagePage from './pages/MessagePage';
 import EditPage from './pages/EditPage';
-import NotFoundPage from './pages/NotFoundPage';
 
 function App() {
   return (

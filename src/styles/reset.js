@@ -24,6 +24,7 @@ const resetStyle = css`
     overflow-wrap: break-word;
     -moz-tab-size: 4;
     tab-size: 4;
+    --ck-border-radius: 0.8rem;
   }
 
   html,
@@ -58,6 +59,17 @@ const resetStyle = css`
     list-style: none;
     margin: 0px;
     padding: 0px;
+  }
+
+  strong {
+    font-weight: 700;
+  }
+  i {
+    font-style: italic;
+  }
+
+  .ck-editor__editable_inline {
+    min-height: 26rem;
   }
 `;
 

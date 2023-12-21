@@ -8,7 +8,7 @@ const { color, layout } = DESIGN_TOKEN;
 
 const Container = styled.div`
   position: relative;
-
+  ${layout.zIndex.dropdown};
   button {
     display: flex;
     position: relative;
@@ -55,7 +55,6 @@ const Ul = styled.ul`
     width: 100%;
   }
   margin-top: 0.8rem;
-  position: absolute;
 `;
 
 const Li = styled.li`

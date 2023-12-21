@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import { Helmet } from 'react-helmet';
 import { getRecipientList } from '../api/users';
 import Button from '../components/elements/Button';
 import PostCardList from '../components/list/PostCardList';
@@ -34,21 +35,26 @@ function ListPage() {
   }, [getRecipientListAsync]);
 
   return (
-    <PageContainer>
-      <PostContainer>
-        <PostTitle>인기 롤링 페이퍼 🔥</PostTitle>
-        <PostCardList postList={hotPostList} />
-      </PostContainer>
-      <PostContainer>
-        <PostTitle>최근에 만든 롤링 페이퍼 ⭐️️</PostTitle>
-        <PostCardList postList={latestPostList} />
-      </PostContainer>
-      <ButtonDiv>
-        <Button $variant="primary" height="x-large" onClick={handleButtonClick}>
-          나도 만들어 보기
-        </Button>
-      </ButtonDiv>
-    </PageContainer>
+    <>
+      <Helmet>
+        <title>List | Rolling</title>
+      </Helmet>
+      <PageContainer>
+        <PostContainer>
+          <PostTitle>인기 롤링 페이퍼 🔥</PostTitle>
+          <PostCardList postList={hotPostList} />
+        </PostContainer>
+        <PostContainer>
+          <PostTitle>최근에 만든 롤링 페이퍼 ⭐️️</PostTitle>
+          <PostCardList postList={latestPostList} />
+        </PostContainer>
+        <ButtonDiv>
+          <Button $variant="primary" height="x-large" onClick={handleButtonClick}>
+            나도 만들어 보기
+          </Button>
+        </ButtonDiv>
+      </PageContainer>
+    </>
   );
 }
 

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { getRecipientMessages, getRecipient } from '../api/users';
+import { Helmet } from 'react-helmet';
+import { getRecipient, getMoreRecipientMessages } from '../api/users';
 import { deleteRecipient } from '../api/delete';
 import useAsync from '../hooks/useAsync';
 import CardList from '../components/edit/EditCardList';
@@ -10,7 +11,7 @@ import Button from '../components/elements/Button';
 import DESIGN_TOKEN from '../styles/tokens';
 
 function EditPage() {
-  const [isLoadingMessages, isErrorMessages, getRecipientMessageAsync] = useAsync(getRecipientMessages);
+  const [isLoadingMoreMessages, isErrorMoreMessages, getMoreRecipientMessageAsync] = useAsync(getMoreRecipientMessages);
   const [isLoadingRecipient, isErrorRecipient, getRecipientAsync] = useAsync(getRecipient);
   const [isLoadingDelete, isErrorDelete, deleteRecipientDAsync] = useAsync(deleteRecipient);
   const [data, setData] = useState([]);
@@ -22,7 +23,7 @@ function EditPage() {
 
   useEffect(() => {
     const handleHeaderServiceLoad = async (recipientId) => {
-      const result = await getRecipientMessageAsync(recipientId);
+      const result = await getMoreRecipientMessageAsync(recipientId, '?limit=100');
       if (!result) return;
       const recipientData = result;
       if (recipientData) {
@@ -41,7 +42,7 @@ function EditPage() {
 
     handleHeaderServiceLoad(id);
     handlePostBackground(id);
-  }, [id, getRecipientMessageAsync, getRecipientAsync, emojiUpload]);
+  }, [id, getMoreRecipientMessageAsync, getRecipientAsync, emojiUpload]);
   const { results } = data;
   const bgColor = bgData.backgroundColor;
   const bgImg = bgData.backgroundImageURL;
@@ -53,6 +54,9 @@ function EditPage() {
 
   return (
     <div>
+      <Helmet>
+        <title>{name && `${name.slice(0, 13)} | Rolling`}</title>
+      </Helmet>
       <HeaderService
         name={name}
         messageCount={messageCount}
@@ -61,7 +65,7 @@ function EditPage() {
         id={id}
         setEmojiUpload={setEmojiUpload}
         emojiUpload={emojiUpload}
-        $bgImg={bgImg}
+        bgImg={bgImg}
       />
       <Container $bgImg={bgImg} $bgColor={bgColor}>
         <ContentWrapper>

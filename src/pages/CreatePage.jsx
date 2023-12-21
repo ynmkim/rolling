@@ -1,6 +1,7 @@
 import React, { styled, css } from 'styled-components';
 import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import Button from '../components/elements/Button';
 import checkIcon from '../assets/icons/check.svg';
 import DESIGN_TOKEN from '../styles/tokens';
@@ -39,11 +40,10 @@ function CreatePage() {
   const [values, setValues] = useState({
     name: '',
     backgroundColor: 'beige',
-    backgroundImage: null,
+    backgroundImageURL: null,
   });
 
   const [activeTab, setActiveTab] = useState(0);
-  console.log(values);
 
   const handleTabClick = (index) => {
     setActiveTab(index);
@@ -108,7 +108,7 @@ function CreatePage() {
               <InputRadio
                 type="radio"
                 id={`optionImage-${index}`}
-                name="backgroundImage"
+                name="backgroundImageURL"
                 value={image}
                 onChange={handleChangeValues}
                 defaultChecked={index === 0}
@@ -121,47 +121,52 @@ function CreatePage() {
   ];
 
   return (
-    <Container>
-      <form>
-        <Recipient>
-          <Title htmlFor="recipient">To.</Title>
-          <InputText
-            type="text"
-            id="recipient"
-            name="name"
-            value={values.name}
-            onChange={handleChangeValues}
-            ref={nameInput}
-            placeholder="받는 사람 이름을 입력해주세요."
-            autoComplete="name"
-          />
-          <ErrorMessage style={{ display: errorMessage ? 'block' : 'none' }}>값을 입력해주세요.</ErrorMessage>
-        </Recipient>
-        <Title>배경화면을 선택해주세요.</Title>
-        <Description>컬러를 선택하거나, 이미지를 선택할 수 있습니다.</Description>
-        <TabList role="tablist">
-          {TABS.map((item, index) => (
-            <Tab
-              role="tab"
-              key={item.label}
-              onClick={() => handleTabClick(index)}
-              onKeyDown={(e) => handleKeyDown(e, index)}
-              tabIndex={index}
-            >
-              <TabButton type="button" className={index === activeTab ? 'active' : ''}>
-                {item.label}
-              </TabButton>
-            </Tab>
-          ))}
-        </TabList>
-        <TabPanel role="tabpanel">{TABS[activeTab].content}</TabPanel>
-        <StyledButton>
-          <Button type="submit" $variant="primary" height="x-large" onClick={handleSubmit} disabled={!values.name}>
-            생성하기
-          </Button>
-        </StyledButton>
-      </form>
-    </Container>
+    <>
+      <Helmet>
+        <title>롤링페이퍼 만들기 | Rolling</title>
+      </Helmet>
+      <Container>
+        <form>
+          <Recipient>
+            <Title htmlFor="recipient">To.</Title>
+            <InputText
+              type="text"
+              id="recipient"
+              name="name"
+              value={values.name}
+              onChange={handleChangeValues}
+              ref={nameInput}
+              placeholder="받는 사람 이름을 입력해주세요."
+              autoComplete="name"
+            />
+            <ErrorMessage style={{ display: errorMessage ? 'block' : 'none' }}>값을 입력해주세요.</ErrorMessage>
+          </Recipient>
+          <Title>배경화면을 선택해주세요.</Title>
+          <Description>컬러를 선택하거나, 이미지를 선택할 수 있습니다.</Description>
+          <TabList role="tablist">
+            {TABS.map((item, index) => (
+              <Tab
+                role="tab"
+                key={item.label}
+                onClick={() => handleTabClick(index)}
+                onKeyDown={(e) => handleKeyDown(e, index)}
+                tabIndex={index}
+              >
+                <TabButton type="button" className={index === activeTab ? 'active' : ''}>
+                  {item.label}
+                </TabButton>
+              </Tab>
+            ))}
+          </TabList>
+          <TabPanel role="tabpanel">{TABS[activeTab].content}</TabPanel>
+          <StyledButton>
+            <Button type="submit" $variant="primary" height="x-large" onClick={handleSubmit} disabled={!values.name}>
+              생성하기
+            </Button>
+          </StyledButton>
+        </form>
+      </Container>
+    </>
   );
 }
 
