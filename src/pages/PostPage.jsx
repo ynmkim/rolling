@@ -68,8 +68,9 @@ function PostPage() {
     };
   }, [id, offset, getMoreRecipientMessageAsync, isLoadingMoreMessages, data, hasNext]);
 
-  const handleNavigate = () => {
-    navigate('edit');
+  const handleEditClick = (e) => {
+    // eslint-disable-next-line no-alert
+    const userConfirmed = window.alert('관리자에게 문의해주세요');
   };
 
   return (
@@ -97,7 +98,7 @@ function PostPage() {
             {isLoadingRecipient ? (
               <Skeleton type="editButton" />
             ) : (
-              <Button type="button" $variant="primary" width="92" height="large" onClick={handleNavigate}>
+              <Button type="button" $variant="primary" width="92" height="large" onClick={handleEditClick}>
                 편집하기
               </Button>
             )}

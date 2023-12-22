@@ -4,7 +4,7 @@ import styles from '../../styles/tokens';
 import toastIconImg from '../../assets/icons/check-circle.svg';
 import exitImg from '../../assets/icons/close.svg';
 
-const { color, overlayBackDropColor } = styles;
+const { layout, color, overlayBackDropColor } = styles;
 
 const ToastDiv = styled.div`
   display: flex;
@@ -16,6 +16,10 @@ const ToastDiv = styled.div`
   flex-shrink: 0;
   border-radius: 0.8rem;
   background: ${overlayBackDropColor.toast};
+
+  @media (max-width: ${layout.breakpoint.mobile}) {
+    width: calc(100vw - 4rem);
+  }
 `;
 
 const UrlCopyText = styled.p`
